@@ -1,0 +1,18 @@
+<p>Another example table with different data:</p>
+
+<table border='1'>
+  <tr>
+    <th>ID</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  {% for x in othermembers %}
+    <tr>
+      <td>{{ x.id }}</td>
+      <td>{{ x.firstname }}</td>
+      <td>{{ x.lastname }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="3">No members found.</td></tr>
+  {% endfor %}
+</table>

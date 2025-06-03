@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+    /* Red table styles */
+    .red-table {
+      border-collapse: collapse;
+      width: 50%;
+      background-color: #f8d7da; /* light red */
+      color: #721c24; /* dark red text */
+    }
+    .red-table th, .red-table td {
+      border: 1px solid #f5c6cb;
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* Blue table styles */
+    .blue-table {
+      border-collapse: collapse;
+      width: 50%;
+      background-color: #d1ecf1; /* light blue */
+      color: #0c5460; /* dark blue text */
+    }
+    .blue-table th, .blue-table td {
+      border: 1px solid #bee5eb;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
 <body>
 
-{% include "mymenu.html" with me="TOBIAS" sponsor="W3SCHOOLS" %}
+<h2>First Half of Members</h2>
+<table class="red-table">
+  <tr>
+    <th>ID</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  {% for member in first_half %}
+    <tr>
+      <td>{{ member.id }}</td>
+      <td>{{ member.firstname }}</td>
+      <td>{{ member.lastname }}</td>
+    </tr>
+  {% endfor %}
+</table>
 
-<h1>Welcome</h1>
-
-<p>This is my webpage</p>
+<h2>Second Half of Members</h2>
+<table class="blue-table">
+  <tr>
+    <th>ID</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  {% for member in second_half %}
+    <tr>
+      <td>{{ member.id }}</td>
+      <td>{{ member.firstname }}</td>
+      <td>{{ member.lastname }}</td>
+    </tr>
+  {% endfor %}
+</table>
 
 </body>
 </html>
