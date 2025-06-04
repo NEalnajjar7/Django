@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from .views import hello_world
 from .views import HelloWorldAPIView
-from .views import ItemList, ItemDetail
+
 
 
 
@@ -14,7 +14,6 @@ urlpatterns = [
     path('testing/', views.testing, name='testing'),
     path('hello/', hello_world),
     path('hello-class/', HelloWorldAPIView.as_view()),
-    path('items/', ItemList.as_view(), name='item-list'),
-    path('items/<int:pk>/', ItemDetail.as_view(), name='item-detail'),
+    
 ]
 

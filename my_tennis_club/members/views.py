@@ -4,7 +4,8 @@ from .models import Member
 from datetime import datetime,date
 from django.db.models import Q
 from rest_framework import generics
-from members.serializers import ItemSerializer
+
+
 
 
 
@@ -67,15 +68,3 @@ class HelloWorldAPIView(APIView):
                       status=status.HTTP_201_CREATED)
 
 # Example for Generic Class-Based Views
-
-from rest_framework import generics
-from .models import Item
-from .serializers import ItemSerializer
-
-class ItemList(generics.ListCreateAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
-
-class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer

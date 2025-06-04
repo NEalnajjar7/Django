@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'apiTask',
     'members'
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'my_tennis_club.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'apiTask' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

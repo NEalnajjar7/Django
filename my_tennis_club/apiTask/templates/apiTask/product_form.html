@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product API Interface</title>
+</head>
+<body>
+    <h1>Product API Interface</h1>
+
+    <form method="post" id="product-form">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+        <label for="api-type">Choose API type:</label>
+        <select id="api-type">
+            <option value="functional">Functional</option>
+            <option value="class">Class-Based</option>
+            <option value="generic">Generic</option>
+        </select><br><br>
+
+        <button type="submit">Create Product</button>
+    </form>
+
+    <hr>
+
+    <h2>Products List</h2>
+    <button onclick="loadProducts()">Load Products</button>
+    <ul id="product-list"></ul>
+
+    <script>
+        document.getElementById("product-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const apiType = document.getElementById("api-type").value;
+            const urlMap = {
+                "functional": "/api/functional/products/",
+                "class": "/api/class/products/",
+                "generic": "/api/generic/products/"
+            };
+
+            const url = urlMap[apiType];
+
+            const data = {
+                name: document.getElementById("name").value,
+                description: document.getElementById("description").value,
+                price: document.getElementById("price").value
+            };
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert("Product Created: " + JSON.stringify(result));
+        });
+
+        async function loadProducts() {
+            const apiType = document.getElementById("api-type").value;
+            const urlMap = {
+                "functional": "/api/functional/products/",
+                "class": "/api/class/products/",
+                "generic": "/api/generic/products/"
+            };
+
+            const url = urlMap[apiType];
+
+            const response = await fetch(url);
+            const products = await response.json();
+
+            const list = document.getElementById("product-list");
+            list.innerHTML = "";
+            products.forEach(product => {
+                const li = document.createElement("li");
+                li.innerText = `${product.name} - $${product.price}`;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
