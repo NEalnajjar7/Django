@@ -71,5 +71,21 @@ def product_template_view(request):
     return render(request, 'product_form.html')
 
 
+from django.shortcuts import get_object_or_404
+
+class ProductDetailClass(APIView):
+    def get(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
 
 
+class ProductDetailClass(APIView):
+    def post(self, request, pk):
+        product = get_object_or_404(product,pk=pk)
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
