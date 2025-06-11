@@ -1,0 +1,49 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">Add a New Car Brand</div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Add Brand</button>
+        </form>
+    </div>
+</div>
+
+<h2 class="mb-3">All Brands</h2>
+
+<div class="row">
+    {% for brand in brands %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if brand.logo %}
+                    <img src="{{ brand.logo.url }}" class="card-img-top" alt="{{ brand.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ brand.name }}</h5>
+
+                    {% if brand.logo %}
+                        <a href="{{ brand.logo.url }}" target="_blank" class="btn btn-sm btn-outline-primary mb-2">
+                            Open Photo
+                        </a>
+                        <p class="text-muted" style="font-size: 0.8em;">
+                            Photo URL: <a href="{{ brand.logo.url }}" target="_blank">{{ brand.logo.url }}</a>
+                        </p>
+                    {% else %}
+                        <p class="text-muted"><em>No photo uploaded</em></p>
+                    {% endif %}
+
+                    <a href="{% url 'delete_brand' brand.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>No car brands yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

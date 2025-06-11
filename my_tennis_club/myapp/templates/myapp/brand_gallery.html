@@ -1,0 +1,22 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<h2 class="mb-3">Car Brand Gallery</h2>
+
+<div class="row">
+    {% for brand in brands %}
+        <div class="col-md-3 mb-4 text-center">
+            <h5>{{ brand.name }}</h5>
+            {% if brand.photo_url %}
+                <img src="{{ brand.photo_url }}" alt="{{ brand.name }}" class="img-fluid rounded shadow-sm" style="max-height:150px;">
+            {% elif brand.logo %}
+                <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" class="img-fluid rounded shadow-sm" style="max-height:150px;">
+            {% else %}
+                <p><em>No photo available</em></p>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No car brands to display.</p>
+    {% endfor %}
+</div>
+{% endblock %}

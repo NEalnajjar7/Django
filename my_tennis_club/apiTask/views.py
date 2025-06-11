@@ -80,7 +80,7 @@ class ProductDetailClass(APIView):
         return Response(serializer.data)
 
 
-class ProductDetailClass(APIView):
+
     def post(self, request, pk):
         product = get_object_or_404(product,pk=pk)
         serializer = ProductSerializer(product, data=request.data)
