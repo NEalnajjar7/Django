@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head content -->
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">CarSite</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'brand_gallery' %}">Gallery</a>
+        </li>
+        <!-- other nav links -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  {% block content %}
+  {% endblock %}
+</div>
+
+<!-- scripts -->
+</body>
+</html>

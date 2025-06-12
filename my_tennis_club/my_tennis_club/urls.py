@@ -6,5 +6,5 @@ urlpatterns = [
     path('', include('members.urls')),  
     path('', include('apiTask.urls')),
     path('', include('myapp.urls')),
-    
+    path('', include('accounts.urls')),
 ]
